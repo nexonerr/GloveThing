@@ -6,6 +6,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
@@ -37,7 +38,7 @@ public class GloveMenu extends AbstractContainerMenu {
                     this.addSlot(new SlotItemHandler(handler, i * 9 + k, 8 + k * 18, 18 + i * 18){
                         @Override
                         public boolean mayPlace(@NotNull ItemStack stack) {
-                            return stack.getItem() != ModItems.GLOVE.get();
+                            return stack.getItem() instanceof BlockItem;
                         }
                     });
                 }

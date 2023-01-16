@@ -19,7 +19,7 @@ public class ModClass {
 
     public static final String MOD_ID = "glove_thing";
 
-    private static final Logger LOGGER = LogUtils.getLogger();
+    public static final Logger LOGGER = LogUtils.getLogger();
 
     public ModClass() {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
