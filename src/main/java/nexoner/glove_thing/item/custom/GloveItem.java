@@ -83,7 +83,7 @@ public class GloveItem extends Item {
                     int toPlace = (int) (Math.random() * (slotList.size()));
                     BlockHitResult hitResult = null;
                     for (Method method : pContext.getClass().getDeclaredMethods()) {
-                        if (method.getName().equals("getHitResult")) {
+                        if (method.getName().equals("getHitResult") || method.getName().equals("m_43718_")) {
                             method.setAccessible(true);
                             try {
                                 hitResult = (BlockHitResult) method.invoke(pContext);
