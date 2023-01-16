@@ -27,6 +27,7 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.BlockSnapshot;
 import net.minecraftforge.event.ForgeEventFactory;
+import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.network.NetworkHooks;
@@ -82,16 +83,12 @@ public class GloveItem extends Item {
                 if (slotList.size() > 0) {
                     int toPlace = (int) (Math.random() * (slotList.size()));
                     BlockHitResult hitResult = null;
-                    for (Method method : pContext.getClass().getDeclaredMethods()) {
-                        if (method.getName().equals("getHitResult") || method.getName().equals("m_43718_")) {
-                            method.setAccessible(true);
-                            try {
-                                hitResult = (BlockHitResult) method.invoke(pContext);
-                            } catch (IllegalAccessException | InvocationTargetException e) {
-                                e.printStackTrace();
-                            }
-                        }
+                    try {
+                        hitResult = (BlockHitResult) ObfuscationReflectionHelper.findMethod(pContext.getClass(),"getHitResult").invoke(pContext);
+                    } catch (IllegalAccessException | InvocationTargetException e) {
+                        e.printStackTrace();
                     }
+
                     if (hitResult != null) {
                         ItemStack blockStack = handler.getStackInSlot(slotList.get(toPlace));
                         System.out.println(blockStack.getItem());
